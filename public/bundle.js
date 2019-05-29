@@ -57474,8 +57474,16 @@ var DoubleGrid = function (_a) {
         }
     };
     return (react_1.default.createElement("div", null,
-        react_1.default.createElement(react_window_1.FixedSizeList, { ref: left, className: "List", height: height - 200, itemData: rows, itemCount: 1000, itemSize: 35, width: width / 2 - 50, useIsScrolling: true, onScroll: handleLeftScroll, style: { float: "left" } }, Row),
-        react_1.default.createElement(react_window_1.FixedSizeList, { ref: right, className: "List", height: height - 200, itemData: rows, itemCount: 1000, itemSize: 35, width: width / 2 - 50, useIsScrolling: true, onScroll: handleRightScroll }, Row)));
+        react_1.default.createElement("div", { style: {
+                width: width / 2 - 50 - 20,
+                overflowY: "auto",
+                overflowX: "hidden",
+                float: "left",
+            } },
+            react_1.default.createElement(react_window_1.FixedSizeList, { ref: left, className: "List", height: height - 200, itemData: rows, itemCount: 1000, itemSize: 35, width: width / 2 - 50, useIsScrolling: true, onScroll: handleLeftScroll }, Row)),
+        react_1.default.createElement(react_window_1.FixedSizeList, { ref: right, className: "List", height: height - 200, itemData: rows, itemCount: 1000, itemSize: 35, width: width / 2 - 50, 
+            // useIsScrolling={true}
+            onScroll: handleRightScroll }, Row)));
 };
 var VirtualScrollGrid = function (_a) {
     return (react_1.default.createElement(react_1.default.Fragment, null,

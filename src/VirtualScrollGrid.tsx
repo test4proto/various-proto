@@ -70,20 +70,28 @@ const DoubleGrid: React.FC<{ rows: any[] }> = ({ rows }) => {
 
     return (
         <div>
-            <List
-                ref={left}
-                className="List"
-                height={height - 200}
-                itemData={rows}
-                itemCount={1000}
-                itemSize={35}
-                width={width / 2 - 50}
-                useIsScrolling={true}
-                onScroll={handleLeftScroll}
-                style={{ float: "left" }}
+            <div
+                style={{
+                    width: width / 2 - 50 - 20,
+                    overflowY: "auto",
+                    overflowX: "hidden",
+                    float: "left",
+                }}
             >
-                {Row}
-            </List>
+                <List
+                    ref={left}
+                    className="List"
+                    height={height - 200}
+                    itemData={rows}
+                    itemCount={1000}
+                    itemSize={35}
+                    width={width / 2 - 50}
+                    useIsScrolling={true}
+                    onScroll={handleLeftScroll}
+                >
+                    {Row}
+                </List>
+            </div>
             <List
                 ref={right}
                 className="List"
@@ -92,7 +100,7 @@ const DoubleGrid: React.FC<{ rows: any[] }> = ({ rows }) => {
                 itemCount={1000}
                 itemSize={35}
                 width={width / 2 - 50}
-                useIsScrolling={true}
+                // useIsScrolling={true}
                 onScroll={handleRightScroll}
             >
                 {Row}
