@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import useWindowResize from "./useWindowResize";
-import { ReactTableDefaults } from "react-table";
 import {
     FixedSizeList as List,
     ListChildComponentProps,
@@ -43,43 +42,18 @@ const Row: React.FC<ListChildComponentProps> = ({
     );
 };
 
-const TbodyComponent: React.FC<{ rows: any[] }> = ({
-    rows,
-    children: makePageRow,
-}) => {
+const DoubleGrid: React.FC<{ rows: any[] }> = ({ rows }) => {
     const { width, height } = useWindowResize(100);
-    // const [scrolling, setScrolling] = useState(false);
     const left = useRef<List>(null);
     const right = useRef<List>(null);
-    // const rowRenderer: React.FC<ListChildComponentProps> = ({
-    //     data,
-    //     index,
-    //     style,
-    //     isScrolling
-    // }) => {
-    //     const rowInfo = rows[index];
-
-    //     if (makePageRow) {
-    //         return (
-    //             <div key={`row-${index}`} style={style}>
-    //                 {makePageRow}
-    //             </div>
-    //         );
-    //     } else {
-    //         return <div />;
-    //     }
-    // };
 
     let scrolling = false;
 
     const handleRightScroll = (e: ListOnScrollProps) => {
         if (left.current && !scrolling) {
             console.log("right", e);
-            //setScrolling(true);
             scrolling = true;
             left.current.scrollTo(e.scrollOffset);
-            //setScrolling(false);
-            //scrolling = false;
         } else {
             scrolling = false;
         }
@@ -87,11 +61,8 @@ const TbodyComponent: React.FC<{ rows: any[] }> = ({
     const handleLeftScroll = (e: ListOnScrollProps) => {
         if (right.current && !scrolling) {
             console.log("left", e);
-            //setScrolling(true);
             scrolling = true;
             right.current.scrollTo(e.scrollOffset);
-            //setScrolling(false);
-            //scrolling = false;
         } else {
             scrolling = false;
         }
@@ -127,24 +98,17 @@ const TbodyComponent: React.FC<{ rows: any[] }> = ({
                 {Row}
             </List>
         </div>
-        // <ReactTableDefaults.TbodyComponent>
-        // </ReactTableDefaults.TbodyComponent>
     );
 };
 
-const App: React.FC<AppProps> = ({}) => {
-    const size = useWindowResize(200);
-    console.log("App", size);
+const VirtualScrollGrid: React.FC<VirtualScrollGridProps> = ({}) => {
     return (
         <>
-            <div>
-                {size.width} , {size.height}
-            </div>
-            <TbodyComponent rows={[]} />
+            <DoubleGrid rows={[]} />
         </>
     );
 };
 
-export interface AppProps {}
+export interface VirtualScrollGridProps {}
 
-export default App;
+export default VirtualScrollGrid;
