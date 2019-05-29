@@ -57427,7 +57427,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 var useWindowResize_1 = __importDefault(__webpack_require__(/*! ./useWindowResize */ "./src/useWindowResize.ts"));
 var react_window_1 = __webpack_require__(/*! react-window */ "./node_modules/react-window/dist/index.esm.js");
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
-var styles_1 = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/index.js");
+var styles_1 = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 var useStyles = styles_1.makeStyles({
     ListItemOdd: {
         background: "white",

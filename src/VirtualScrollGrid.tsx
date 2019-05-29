@@ -6,7 +6,7 @@ import {
     ListOnScrollProps,
 } from "react-window";
 import classNames from "classnames";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     ListItemOdd: {
