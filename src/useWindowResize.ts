@@ -28,7 +28,7 @@ const useWindowResize = (throttleTime: number) => {
             window.removeEventListener("resize", handleResize);
         };
     });
-    return { size };
+    return size;
 };
 
 export default useWindowResize;
