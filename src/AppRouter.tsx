@@ -1,20 +1,37 @@
 import React from "react";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-import App from "./App";
-import Portal from "./Portal";
+import WindowResize from "./WindowResize";
+import HeaderAndDrawer from "./HeaderAndDrawer";
+import VirtualScrollGrid from "./VirtualScrollGrid";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-const AppRouter: React.FC<RouterProps> = ({}) => {
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        content: {
+            flexGrow: 1,
+            padding: theme.spacing(3),
+        },
+        toolbar: theme.mixins.toolbar,
+    })
+);
+
+const AppRouter: React.FC = () => {
+    const classes = useStyles();
+
     return (
         <Router>
-            <Link to="/">Portal</Link>
-            <Link to="/resize-test">Resize Test</Link>
-            <hr />
-            <Route exact path="/" component={Portal} />
-            <Route path="/resize-test" component={App} />
+            <HeaderAndDrawer />
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Route exact path="/" />
+                <Route path="/resize-test" component={WindowResize} />
+                <Route
+                    path="/virtual-grid-test"
+                    component={VirtualScrollGrid}
+                />
+            </main>
         </Router>
     );
 };
-
-export interface RouterProps {}
 
 export default AppRouter;

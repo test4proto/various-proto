@@ -21,7 +21,8 @@
         "react-dom": "^16.8.6",
         "react-router-dom": "^5.0.0",
         "react-table": "^6.10.0",
-        "react-window": "^1.8.2"
+        "react-window": "^1.8.2",
+        "use-react-router": "^1.0.7"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.7",
