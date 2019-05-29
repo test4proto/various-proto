@@ -79,6 +79,8 @@ const TbodyComponent: React.FC<{ rows: any[] }> = ({
             scrolling = true;
             left.current.scrollTo(e.scrollOffset);
             //setScrolling(false);
+            //scrolling = false;
+        } else {
             scrolling = false;
         }
     };
@@ -89,6 +91,8 @@ const TbodyComponent: React.FC<{ rows: any[] }> = ({
             scrolling = true;
             right.current.scrollTo(e.scrollOffset);
             //setScrolling(false);
+            //scrolling = false;
+        } else {
             scrolling = false;
         }
     };
