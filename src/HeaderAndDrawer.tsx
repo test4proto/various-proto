@@ -87,6 +87,11 @@ const HeaderAndDrawer: React.FC<HeaderAndDrawerProps> = ({}) => {
             icon: "table",
             next: "/virtual-grid-test",
         },
+        {
+            title: "Context Test",
+            icon: "bell",
+            next: "/context-test",
+        },
     ];
 
     return (

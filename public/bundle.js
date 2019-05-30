@@ -57243,6 +57243,7 @@ var WindowResize_1 = __importDefault(__webpack_require__(/*! ./WindowResize */ "
 var HeaderAndDrawer_1 = __importDefault(__webpack_require__(/*! ./HeaderAndDrawer */ "./src/HeaderAndDrawer.tsx"));
 var VirtualScrollGrid_1 = __importDefault(__webpack_require__(/*! ./VirtualScrollGrid */ "./src/VirtualScrollGrid.tsx"));
 var styles_1 = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+var ContextTest_1 = __importDefault(__webpack_require__(/*! ./ContextTest */ "./src/ContextTest.tsx"));
 var useStyles = styles_1.makeStyles(function (theme) {
     return styles_1.createStyles({
         content: {
@@ -57260,9 +57261,58 @@ var AppRouter = function () {
             react_1.default.createElement("div", { className: classes.toolbar }),
             react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: "/" }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "/resize-test", component: WindowResize_1.default }),
-            react_1.default.createElement(react_router_dom_1.Route, { path: "/virtual-grid-test", component: VirtualScrollGrid_1.default }))));
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/virtual-grid-test", component: VirtualScrollGrid_1.default }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/context-test", component: ContextTest_1.default }))));
 };
 exports.default = AppRouter;
+
+
+/***/ }),
+
+/***/ "./src/ContextTest.tsx":
+/*!*****************************!*\
+  !*** ./src/ContextTest.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var TestContext_1 = __webpack_require__(/*! ./TestContext */ "./src/TestContext.tsx");
+var View = function () {
+    var val = react_1.useContext(TestContext_1.TestContext).val;
+    return (react_1.default.createElement("div", null,
+        react_1.default.createElement("h4", null, "View"),
+        react_1.default.createElement("div", null, val)));
+};
+var Control = function () {
+    var _a = react_1.useContext(TestContext_1.TestContext), val = _a.val, setVal = _a.setVal;
+    var handleChange = function (e) {
+        setVal(parseInt(e.currentTarget.value || "0"));
+    };
+    return (react_1.default.createElement("div", null,
+        react_1.default.createElement("input", { type: "number", value: val, onChange: handleChange })));
+};
+var ContextTest = function (_a) {
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement(TestContext_1.TestProvider, null,
+            react_1.default.createElement(View, null),
+            react_1.default.createElement(Control, null)),
+        react_1.default.createElement("hr", null),
+        react_1.default.createElement(TestContext_1.TestProvider, null,
+            react_1.default.createElement(View, null),
+            react_1.default.createElement(Control, null))));
+};
+exports.default = ContextTest;
 
 
 /***/ }),
@@ -57358,6 +57408,11 @@ var HeaderAndDrawer = function (_a) {
             icon: "table",
             next: "/virtual-grid-test",
         },
+        {
+            title: "Context Test",
+            icon: "bell",
+            next: "/context-test",
+        },
     ];
     return (react_1.default.createElement("div", { className: classes.root },
         react_1.default.createElement(AppBar_1.default, { position: "fixed", className: classes.appBar },
@@ -57399,6 +57454,34 @@ var app = document.querySelector("#app");
 if (app) {
     react_dom_1.render(react_1.default.createElement(AppRouter_1.default, null), app);
 }
+
+
+/***/ }),
+
+/***/ "./src/TestContext.tsx":
+/*!*****************************!*\
+  !*** ./src/TestContext.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+exports.TestContext = react_1.createContext({ val: 0, setVal: function (n) { } });
+exports.TestProvider = function (_a) {
+    var children = _a.children;
+    var _b = react_1.useState(0), val = _b[0], setVal = _b[1];
+    return (react_1.default.createElement(exports.TestContext.Provider, { value: { val: val, setVal: setVal } }, children));
+};
 
 
 /***/ }),

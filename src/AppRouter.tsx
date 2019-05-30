@@ -4,6 +4,7 @@ import WindowResize from "./WindowResize";
 import HeaderAndDrawer from "./HeaderAndDrawer";
 import VirtualScrollGrid from "./VirtualScrollGrid";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import ContextTest from "./ContextTest";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -29,6 +30,7 @@ const AppRouter: React.FC = () => {
                     path="/virtual-grid-test"
                     component={VirtualScrollGrid}
                 />
+                <Route path="/context-test" component={ContextTest} />
             </main>
         </Router>
     );
