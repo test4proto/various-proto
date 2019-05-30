@@ -57419,7 +57419,7 @@ var HeaderAndDrawer = function (_a) {
             react_1.default.createElement(Toolbar_1.default, null,
                 react_1.default.createElement(IconButton_1.default, { color: "inherit", "aria-label": "Open drawer", onClick: toggleDrawer(true), edge: "start", className: classNames(classes.menuButton, open && classes.hide) },
                     react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: "bars" })),
-                react_1.default.createElement(Typography_1.default, { variant: "h6", noWrap: true }, "Persistent drawer"))),
+                react_1.default.createElement(Typography_1.default, { variant: "h6", noWrap: true }, "Various Prototypes"))),
         react_1.default.createElement(Drawer_1.default, { open: open, onClose: toggleDrawer(false) },
             react_1.default.createElement("div", { className: classes.list, role: "presentation", onClick: toggleDrawer(false), onKeyDown: toggleDrawer(false) },
                 react_1.default.createElement(List_1.default, null, createList(list)),

@@ -111,7 +111,7 @@ const HeaderAndDrawer: React.FC<HeaderAndDrawerProps> = ({}) => {
                         <FontAwesomeIcon icon="bars" />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Persistent drawer
+                        Various Prototypes
                     </Typography>
                 </Toolbar>
             </AppBar>
