@@ -57244,6 +57244,7 @@ var HeaderAndDrawer_1 = __importDefault(__webpack_require__(/*! ./HeaderAndDrawe
 var VirtualScrollGrid_1 = __importDefault(__webpack_require__(/*! ./VirtualScrollGrid */ "./src/VirtualScrollGrid.tsx"));
 var styles_1 = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 var ContextTest_1 = __importDefault(__webpack_require__(/*! ./ContextTest */ "./src/ContextTest.tsx"));
+var LoadingTest_1 = __importDefault(__webpack_require__(/*! ./LoadingTest */ "./src/LoadingTest.tsx"));
 var useStyles = styles_1.makeStyles(function (theme) {
     return styles_1.createStyles({
         content: {
@@ -57262,7 +57263,8 @@ var AppRouter = function () {
             react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: "/" }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "/resize-test", component: WindowResize_1.default }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "/virtual-grid-test", component: VirtualScrollGrid_1.default }),
-            react_1.default.createElement(react_router_dom_1.Route, { path: "/context-test", component: ContextTest_1.default }))));
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/context-test", component: ContextTest_1.default }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/loading-test", component: LoadingTest_1.default }))));
 };
 exports.default = AppRouter;
 
@@ -57413,6 +57415,11 @@ var HeaderAndDrawer = function (_a) {
             icon: "bell",
             next: "/context-test",
         },
+        {
+            title: "Loading Test",
+            icon: "bell",
+            next: "/loading-test",
+        },
     ];
     return (react_1.default.createElement("div", { className: classes.root },
         react_1.default.createElement(AppBar_1.default, { position: "fixed", className: classes.appBar },
@@ -57426,6 +57433,138 @@ var HeaderAndDrawer = function (_a) {
                 react_1.default.createElement(Divider_1.default, null)))));
 };
 exports.default = HeaderAndDrawer;
+
+
+/***/ }),
+
+/***/ "./src/LoadingContext.tsx":
+/*!********************************!*\
+  !*** ./src/LoadingContext.tsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+exports.LoadingContext = react_1.createContext({
+    loading: false,
+    showLoading: function () {
+        console.log("default show");
+    },
+    hideLoading: function () {
+        console.log("default hide");
+    },
+});
+exports.LoadingProvider = function (_a) {
+    var children = _a.children;
+    var _b = react_1.useState(false), loading = _b[0], setLoading = _b[1];
+    console.log("init provider", loading);
+    return (react_1.default.createElement(exports.LoadingContext.Provider, { value: {
+            loading: loading,
+            showLoading: function () {
+                console.log("start");
+                setLoading(function (e) { return true; });
+            },
+            hideLoading: function () { return setLoading(function (e) { return false; }); },
+        } }, children));
+};
+
+
+/***/ }),
+
+/***/ "./src/LoadingMessage.tsx":
+/*!********************************!*\
+  !*** ./src/LoadingMessage.tsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var useLoading_1 = __importDefault(__webpack_require__(/*! ./useLoading */ "./src/useLoading.ts"));
+var LoadingMessage = function (_a) {
+    var loading = useLoading_1.default().loading;
+    return (react_1.default.createElement("div", { style: {
+            width: "100%",
+            height: "100%",
+            position: "fixed",
+            opacity: 0.5,
+            background: "#000",
+            display: loading ? "flex" : "none",
+            top: 0,
+            left: 0,
+            alignItems: "center",
+            margin: "auto",
+            justifyContent: "center",
+        } },
+        react_1.default.createElement("div", { style: { color: "white", fontSize: 40 } }, "Loading")));
+};
+exports.default = LoadingMessage;
+
+
+/***/ }),
+
+/***/ "./src/LoadingTest.tsx":
+/*!*****************************!*\
+  !*** ./src/LoadingTest.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var useLoading_1 = __importDefault(__webpack_require__(/*! ./useLoading */ "./src/useLoading.ts"));
+var LoadingContext_1 = __webpack_require__(/*! ./LoadingContext */ "./src/LoadingContext.tsx");
+var LoadingMessage_1 = __importDefault(__webpack_require__(/*! ./LoadingMessage */ "./src/LoadingMessage.tsx"));
+var LoadingTest = function (_a) {
+    var _b = useLoading_1.default(), showLoading = _b.showLoading, hideLoading = _b.hideLoading;
+    var _c = react_1.useState(false), state = _c[0], setState = _c[1];
+    react_1.useEffect(function () {
+        console.log("load start");
+        showLoading();
+        var to = setTimeout(hideLoading, 1000);
+        return function () { return clearTimeout(to); };
+    }, [state]);
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("h4", null, "Loading Test"),
+        react_1.default.createElement("button", { onClick: function (e) { return setState(!state); } }, "Load"),
+        react_1.default.createElement("div", null,
+            "State => ",
+            String(state))));
+};
+// Providerを含むコンポーネントは再描画されるとステートが飛ぶので再描画されない場所に配置
+var LoadingContainer = function () {
+    return (react_1.default.createElement(LoadingContext_1.LoadingProvider, null,
+        react_1.default.createElement(LoadingMessage_1.default, null),
+        react_1.default.createElement(LoadingTest, null)));
+};
+exports.default = LoadingContainer;
 
 
 /***/ }),
@@ -57614,6 +57753,26 @@ exports.default = App;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "index.html";
+
+/***/ }),
+
+/***/ "./src/useLoading.ts":
+/*!***************************!*\
+  !*** ./src/useLoading.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var LoadingContext_1 = __webpack_require__(/*! ./LoadingContext */ "./src/LoadingContext.tsx");
+var useLoading = function () {
+    return react_1.useContext(LoadingContext_1.LoadingContext);
+};
+exports.default = useLoading;
+
 
 /***/ }),
 
