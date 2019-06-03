@@ -1,6 +1,6 @@
 # various-proto
 
-'''ts
+```ts
 declare module 'react-table' {
   export type Cell = {
     render: (type: string) => any;
@@ -155,4 +155,4 @@ declare module 'react-table' {
     rows: [];
   };
 }
-'''
+```
